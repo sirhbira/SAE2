@@ -1,6 +1,7 @@
 package com.example.sae.controleur;
 
 
+import com.example.sae.Main;
 import com.example.sae.vue.TerrainVue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,13 +33,17 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int tileSize = 150;
-        Terrain t = new Terrain(tileSize); // initialisation du terrain avec une taille de case de 32
-        TerrainVue tv = new TerrainVue(t, tilePane);
+        int tileSize = 40;
+        terrain = new Terrain(tileSize); // initialisation du terrain avec une taille de case de 32
+        TerrainVue tv = new TerrainVue(terrain, tilePane);
         tv.afficherTerrain();
 
-        personnage = new Ennemi(0, 0, 40);
+        URL urlImageEnn = Main.class.getResource("Alien.png");
+        imageEnn = new Image(String.valueOf(urlImageEnn));
 
+       personnage = new Ennemi(0,0,40);
+            ImageView iv2 = new ImageView(imageEnn);
+            this.PaneauDeJeu.getChildren().add(iv2);
 
 
     }
