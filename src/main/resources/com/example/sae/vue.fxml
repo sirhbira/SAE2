@@ -61,7 +61,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <TilePane fx:id="tilePane" prefWidth="112.0" />
+            <TilePane fx:id="tilePane" prefColumns="10" prefHeight="160.0" prefRows="10" prefTileHeight="16.0" prefTileWidth="16.0" prefWidth="160.0" />
          </children>
       </Pane>
    </left>
