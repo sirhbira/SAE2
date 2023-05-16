@@ -42,7 +42,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="208.0" text="Vague suivante" />
+                        <Button fx:id="boutonVague" mnemonicParsing="false" prefHeight="33.0" prefWidth="208.0" text="Vague suivante" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-alignment: center;">

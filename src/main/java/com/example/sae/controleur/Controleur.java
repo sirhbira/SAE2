@@ -5,6 +5,7 @@ import com.example.sae.Main;
 import com.example.sae.vue.TerrainVue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -17,6 +18,8 @@ import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
 
+    @FXML
+    private Button boutonVague;
 
     @FXML
     private Pane PaneauDeJeu;
@@ -27,14 +30,14 @@ public class Controleur implements Initializable {
     private Ennemi personnage;
 
      private Image imageEnn;
+
      private Terrain terrain;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int tileSize = 40;
-        terrain = new Terrain(tileSize); // initialisation du terrain avec une taille de case de 32
+        terrain = new Terrain(100); // initialisation du terrain avec une taille de case de 32
         TerrainVue tv = new TerrainVue(terrain, tilePane);
         tv.afficherTerrain();
 
