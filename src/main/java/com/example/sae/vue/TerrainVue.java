@@ -22,7 +22,7 @@ public class TerrainVue {
     public TerrainVue(Terrain terrain, TilePane tilePane) {
         this.terrain = terrain;
         this.tilePane = tilePane;
-        this.ennemi = new Ennemi(0, 0,1); // Initialisation de l'ennemi à la position (0, 0) et vitesse 1.0
+        this.ennemi = new Ennemi(0, terrain,100); // Initialisation de l'ennemi à la position (0, 0) et vitesse 1.0
     }
 
 

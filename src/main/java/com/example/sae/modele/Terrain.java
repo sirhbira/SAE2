@@ -17,7 +17,7 @@ public class Terrain {
                 {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 1, 1, 2},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 2}
         };
     }
 
@@ -36,4 +36,10 @@ public class Terrain {
     public void setTileSize(int tileSize) {
         this.tileSize = tileSize;
     }
+
+
+
+//    public boolean dansTerrain (int x,int y){
+//        return (0<= x&& x<this.width && 0<= y&& y < this.height);
+//    }
 }
