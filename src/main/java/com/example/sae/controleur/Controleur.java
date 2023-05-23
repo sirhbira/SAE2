@@ -2,9 +2,12 @@ package com.example.sae.controleur;
 
 
 import com.example.sae.Main;
+import com.example.sae.modele.Acteur;
+import com.example.sae.vue.EnnemisVue;
 import com.example.sae.vue.TerrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,8 +49,7 @@ public class Controleur implements Initializable {
             personnage = new Ennemi(40,terrain,100);
             ImageView iv2 = new ImageView(imageEnn);
 
-//            iv2.setLayoutX(personnage.getX());
-//            iv2.setLayoutX(personnage.getY());
+
             iv2.translateXProperty().bind(personnage.xProperty());
             iv2.translateYProperty().bind(personnage.yProperty());
             return iv2;
@@ -61,17 +63,17 @@ public class Controleur implements Initializable {
         TerrainVue tv = new TerrainVue(terrain, tilePane);
         tv.afficherTerrain();
 
-        URL urlImageEnn = Main.class.getResource("Alien.png");
-        imageEnn = new Image(String.valueOf(urlImageEnn));
+        EnnemisVue ennemisVue = new EnnemisVue(PaneauDeJeu);
 
        personnage = new Ennemi(40,terrain,100);
-       ImageView iv2 = new ImageView(imageEnn);
-       iv2.translateXProperty().bind(personnage.xProperty());
-       iv2.translateYProperty().bind(personnage.yProperty());
-       this.PaneauDeJeu.getChildren().add(iv2);
+       ennemisVue.créerSprite(personnage);
+
 
        initAnimation();
-       gameLoop.play();;
+       gameLoop.play();
+
+//        ListChangeListener<Acteur> listen=new ListObs();
+//        terrain.getActeurs().addListener(listen);
 
     }
 
