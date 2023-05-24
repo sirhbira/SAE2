@@ -1,13 +1,10 @@
 package com.example.sae.controleur;
 
 
-import com.example.sae.Main;
-import com.example.sae.modele.Acteur;
 import com.example.sae.vue.EnnemisVue;
 import com.example.sae.vue.TerrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,17 +62,20 @@ public class Controleur implements Initializable {
 
         EnnemisVue ennemisVue = new EnnemisVue(PaneauDeJeu);
 
-       personnage = new Ennemi(40,terrain,100);
-       ennemisVue.créerSprite(personnage);
+        personnage = new Ennemi(40, terrain, 100);
+        ennemisVue.créerSprite(personnage);
 
 
-       initAnimation();
-       gameLoop.play();
+        initAnimation();
+        gameLoop.play();
 
-//        ListChangeListener<Acteur> listen=new ListObs();
+//        ListChangeListener<Ennemi> listen = new ListObs();
 //        terrain.getActeurs().addListener(listen);
 
-    }
+
+
+        }
+
 
     private void initAnimation() {
         gameLoop = new Timeline();
@@ -92,34 +92,6 @@ public class Controleur implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
-
-//    @FXML
-//    private void moveUp(){
-//        personnage.moveUp();
-//        ImageView iv2 = new ImageView(imageEnn);
-//        iv2.setY(personnage.getY());
-//    }
-//
-//    @FXML
-//    private void moveDown(){
-//        personnage.moveDown();
-//        ImageView iv2 = new ImageView(imageEnn);
-//        iv2.setY(personnage.getY());
-//    }
-//    @FXML
-//    private void moveLeft(){
-//        personnage.moveLeft();
-//        ImageView iv2 = new ImageView(imageEnn);
-//        iv2.setX(personnage.getX());
-//    }
-//    @FXML
-//    private void moveRight(){
-//        personnage.moveRight();
-//        ImageView iv2 = new ImageView(imageEnn);
-//        iv2.setX(personnage.getX());
-//    }
-
 
 
 }

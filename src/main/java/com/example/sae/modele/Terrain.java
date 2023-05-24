@@ -1,16 +1,16 @@
 package com.example.sae.modele;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Terrain {
 
     private int[][] tileMap;
     private int tileSize;
-    private ObservableList<Acteur> acteurs;
+    private ObservableList<Ennemi> ennemis;
 
 
     public Terrain(int tileSize) {
-
         this.tileSize = tileSize;
         this.tileMap = new int[][]{
                 {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -24,9 +24,7 @@ public class Terrain {
                 {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 1, 2}
         };
-    }
-    public ObservableList<Acteur> getActeurs() {
-        return acteurs;
+        this.ennemis = FXCollections.observableArrayList();
     }
 
     public int[][] getTileMap() {
@@ -45,9 +43,11 @@ public class Terrain {
         this.tileSize = tileSize;
     }
 
+    public ObservableList<Ennemi> getEnnemi() {
+        return ennemis;
+    }
 
-
-//    public boolean dansTerrain (int x,int y){
-//        return (0<= x&& x<this.width && 0<= y&& y < this.height);
-//    }
+    public void ajouterEnnemi(Ennemi e) {
+        ennemis.add(e);
+    }
 }

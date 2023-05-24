@@ -5,13 +5,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 
 
-public abstract class Acteur {
+public abstract class Vaisseau {
 
     private IntegerProperty x,y;
     private int v; // vitesse de deplacement
     protected Terrain terrain;
     private int pv;
-    public Acteur(int x, int y, int v, Terrain terrain,int pv) {
+    public Vaisseau(int x, int y, int v, Terrain terrain, int pv) {
         this.pv=pv;
         this.x=new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
@@ -19,7 +19,7 @@ public abstract class Acteur {
         this.terrain=terrain;
     }
 
-    public Acteur( int v, Terrain terrain, int pv) {
+    public Vaisseau(int v, Terrain terrain, int pv) {
         this.pv=pv;
         this.x=new SimpleIntegerProperty(0);
         this.y = new SimpleIntegerProperty(1);

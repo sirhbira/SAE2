@@ -1,6 +1,5 @@
 package com.example.sae.controleur;
 
-import com.example.sae.modele.Acteur;
 import com.example.sae.modele.Ennemi;
 import com.example.sae.modele.Terrain;
 import javafx.collections.ListChangeListener;
@@ -23,10 +22,10 @@ public class ListObs implements ListChangeListener<Ennemi> {
                 ImageView iv2 = new ImageView(imageEnn);
 //                iv2.translateXProperty().bind(personnage.xProperty());
 //                iv2.translateYProperty().bind(personnage.yProperty());
-                if(personnage.arrive()) {
-                    this.PaneauDeJeu.getChildren().remove(iv2);
+//                if(personnage.arrive()) {
+//                    this.PaneauDeJeu.getChildren().remove(iv2);
                 }
             }
         }
     }
-}
+

@@ -1,7 +1,7 @@
 package com.example.sae.vue;
 
 import com.example.sae.Main;
-import com.example.sae.modele.Acteur;
+import com.example.sae.modele.Ennemi;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -19,7 +19,7 @@ public class EnnemisVue {
         imageEnn = new Image(String.valueOf(urlImageEnn));
     }
 
-    public void créerSprite(Acteur personnage) {
+    public void créerSprite(Ennemi personnage) {
         ImageView iv2 = new ImageView(imageEnn);
         iv2.translateXProperty().bind(personnage.xProperty());
         iv2.translateYProperty().bind(personnage.yProperty());
