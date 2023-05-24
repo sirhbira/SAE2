@@ -71,17 +71,17 @@ public class Ennemi {
             setX(this.getX());
         }else {
             if (terrain.getTileMap()[ligne][colonne + 1] == 1 || terrain.getTileMap()[ligne][colonne + 1] == 2 ) {
-                setX(this.getX() + 1);
-                c++;
-                if (c == 16) {
+                setX(this.getX() + v);
+                c=c+v;
+                if (c >= 16) {
                     c = 0;
                     colonne++;
                 }
             } else {
                 if (terrain.getTileMap()[ligne + 1][colonne] == 1) {
-                    setY(this.getY() + 1);
-                    c++;
-                    if (c == 16) {
+                    setY(this.getY() + v);
+                    c=c+v;
+                    if (c >= 16) {
                         c = 0;
                         ligne++;
                     }

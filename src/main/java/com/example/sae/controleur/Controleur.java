@@ -1,8 +1,10 @@
 package com.example.sae.controleur;
 
 
+import com.example.sae.modele.Vaisseau;
 import com.example.sae.vue.EnnemisVue;
 import com.example.sae.vue.TerrainVue;
+import com.example.sae.vue.VaisseauxVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -39,11 +41,13 @@ public class Controleur implements Initializable {
 
      private Terrain terrain;
 
+     private Vaisseau vaiseau;
+
 
     @FXML
     ImageView boutonVague(ActionEvent event) {
         if (boutonVague.isPressed()){
-            personnage = new Ennemi(40,terrain,100);
+            personnage = new Ennemi(4,terrain,100);
             ImageView iv2 = new ImageView(imageEnn);
 
 
@@ -62,8 +66,13 @@ public class Controleur implements Initializable {
 
         EnnemisVue ennemisVue = new EnnemisVue(PaneauDeJeu);
 
-        personnage = new Ennemi(40, terrain, 100);
+        personnage = new Ennemi(4, terrain, 100);
         ennemisVue.créerSprite(personnage);
+
+        VaisseauxVue vaisseauxVue = new VaisseauxVue(PaneauDeJeu);
+
+        vaiseau = new Vaisseau(50,70,terrain,50);
+        vaisseauxVue.créerSprite(vaiseau);
 
 
         initAnimation();

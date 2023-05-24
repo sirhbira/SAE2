@@ -5,30 +5,18 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 
 
-public abstract class Vaisseau {
+public  class Vaisseau {
 
     private IntegerProperty x,y;
-    private int v; // vitesse de deplacement
     protected Terrain terrain;
-    private int pv;
-    public Vaisseau(int x, int y, int v, Terrain terrain, int pv) {
-        this.pv=pv;
+    private int prix;
+
+    public Vaisseau(int x, int y, Terrain terrain, int prix) {
+        this.prix=prix;
         this.x=new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.v = v;
         this.terrain=terrain;
     }
-
-    public Vaisseau(int v, Terrain terrain, int pv) {
-        this.pv=pv;
-        this.x=new SimpleIntegerProperty(0);
-        this.y = new SimpleIntegerProperty(1);
-        this.v = v;
-        this.terrain=terrain;
-
-    }
-
-
 
     public IntegerProperty xProperty(){
         return x;
@@ -56,28 +44,6 @@ public abstract class Vaisseau {
         this.yProperty().setValue(n);
     }
 
-    public boolean estVivant() {
-        return this.pv>0;
-    }
-
-    public void meurt(){
-        this.pv=0;
-    }
-
-
-    public void decrementerPv(int n) {
-        this.pv -= n;
-    }
-
-    public abstract void seDeplace();
-
-
-
-
-    @Override
-    public String toString() {
-        return "x=" + x + ", y=" + y ;
-    }
 
 
 }
