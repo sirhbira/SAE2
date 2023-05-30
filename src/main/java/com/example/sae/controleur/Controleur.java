@@ -1,6 +1,7 @@
 package com.example.sae.controleur;
 
 
+import com.example.sae.Main;
 import com.example.sae.modele.Vaisseau;
 import com.example.sae.vue.EnnemisVue;
 import com.example.sae.vue.TerrainVue;
@@ -13,6 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import com.example.sae.modele.Ennemi;
@@ -43,20 +48,56 @@ public class Controleur implements Initializable {
 
      private Vaisseau vaiseau;
 
+    @FXML
+    private ImageView vaisseauNormal;
+
 
     @FXML
-    ImageView boutonVague(ActionEvent event) {
-        if (boutonVague.isPressed()){
-            personnage = new Ennemi(4,terrain,100);
+    private void boutonVague(ActionEvent event) {
+        if (boutonVague.isPressed()) {
+            personnage = new Ennemi(4, terrain, 100);
             ImageView iv2 = new ImageView(imageEnn);
-
 
             iv2.translateXProperty().bind(personnage.xProperty());
             iv2.translateYProperty().bind(personnage.yProperty());
-            return iv2;
+
+            // Ajoutez iv2 à PaneauDeJeu ou à un autre conteneur approprié
+            PaneauDeJeu.getChildren().add(iv2);
         }
-        return null;
     }
+    @FXML
+    private void setOnDragDetected(ActionEvent event) {
+        Dragboard db = vaisseauNormal.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(vaisseauNormal.getImage());
+        db.setContent(content);
+        event.consume();
+    }
+
+    @FXML
+    private void setOnDragDropped(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasImage()) {
+            ImageView droppedImage = new ImageView(db.getImage());
+            // Positionnez l'image dans le plateau de jeu selon les coordonnées de l'événement de glisser-déposer.
+            // Vous pouvez utiliser les méthodes appropriées du conteneur (par exemple, add(droppedImage, columnIndex, rowIndex) pour un GridPane).
+            PaneauDeJeu.getChildren().add(droppedImage);
+            success = true;
+        }
+        event.setDropCompleted(success);
+        event.consume();
+    }
+
+    @FXML
+    private void setOnDragOver(DragEvent event) {
+        if (event.getGestureSource() != PaneauDeJeu && event.getDragboard().hasImage()) {
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+        event.consume();
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,10 +110,6 @@ public class Controleur implements Initializable {
         personnage = new Ennemi(4, terrain, 100);
         ennemisVue.créerSprite(personnage);
 
-        VaisseauxVue vaisseauxVue = new VaisseauxVue(PaneauDeJeu);
-
-        vaiseau = new Vaisseau(50,70,terrain,50);
-        vaisseauxVue.créerSprite(vaiseau);
 
 
         initAnimation();
@@ -82,13 +119,12 @@ public class Controleur implements Initializable {
 //        terrain.getActeurs().addListener(listen);
 
 
-
-        }
+    }
 
 
     private void initAnimation() {
         gameLoop = new Timeline();
-         gameLoop.setCycleCount(Timeline.INDEFINITE);
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
@@ -101,6 +137,5 @@ public class Controleur implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
 
 }
