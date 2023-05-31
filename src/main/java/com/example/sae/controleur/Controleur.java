@@ -1,7 +1,6 @@
 package com.example.sae.controleur;
 
 
-import com.example.sae.Main;
 import com.example.sae.modele.Vaisseau;
 import com.example.sae.vue.EnnemisVue;
 import com.example.sae.vue.TerrainVue;
@@ -14,10 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import com.example.sae.modele.Ennemi;
@@ -40,75 +35,99 @@ public class Controleur implements Initializable {
 
     private Timeline gameLoop;
 
-    private Ennemi personnage;
+    private Ennemi ennemi;
+
+    private EnnemisVue ennemisVue;
 
      private Image imageEnn;
 
      private Terrain terrain;
 
-     private Vaisseau vaiseau;
+     private Vaisseau vaisseau;
 
     @FXML
     private ImageView vaisseauNormal;
+
+    private VaisseauxVue vaisseauxVue;
+
+    private Image imageVai ;
 
 
     @FXML
     private void boutonVague(ActionEvent event) {
         if (boutonVague.isPressed()) {
-            personnage = new Ennemi(4, terrain, 100);
+            ennemi = new Ennemi(4, terrain, 100);
             ImageView iv2 = new ImageView(imageEnn);
 
-            iv2.translateXProperty().bind(personnage.xProperty());
-            iv2.translateYProperty().bind(personnage.yProperty());
+            iv2.translateXProperty().bind(ennemi.xProperty());
+            iv2.translateYProperty().bind(ennemi.yProperty());
 
             // Ajoutez iv2 à PaneauDeJeu ou à un autre conteneur approprié
             PaneauDeJeu.getChildren().add(iv2);
         }
     }
-    @FXML
-    private void setOnDragDetected(ActionEvent event) {
-        Dragboard db = vaisseauNormal.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent content = new ClipboardContent();
-        content.putImage(vaisseauNormal.getImage());
-        db.setContent(content);
-        event.consume();
-    }
+
 
     @FXML
-    private void setOnDragDropped(DragEvent event) {
-        Dragboard db = event.getDragboard();
-        boolean success = false;
-        if (db.hasImage()) {
-            ImageView droppedImage = new ImageView(db.getImage());
-            // Positionnez l'image dans le plateau de jeu selon les coordonnées de l'événement de glisser-déposer.
-            // Vous pouvez utiliser les méthodes appropriées du conteneur (par exemple, add(droppedImage, columnIndex, rowIndex) pour un GridPane).
-            PaneauDeJeu.getChildren().add(droppedImage);
-            success = true;
+    void testTourelle(ActionEvent event) {
+        vaisseau = new Vaisseau(0, 0, terrain, 30); // Modifier cette ligne
+
+        creerSpriteTourelle(vaisseau);
+
+        vaisseauNormal.setOnMouseDragged(eve -> {
+            vaisseau.setX((int) eve.getSceneX());
+            vaisseau.setY((int) (eve.getSceneY()));
+            System.out.println("Tourelle :" + vaisseau.getX() + " " + vaisseau.getY());
+        });
+    }
+
+
+    public void creerSpriteTourelle(Vaisseau t) {
+//        Circle c = new Circle(8);
+//        c.setFill(Color.RED);
+
+        ImageView iv5 = new ImageView(imageVai);
+        iv5.setTranslateX(t.getX());
+        iv5.setTranslateY(t.getY());
+        iv5.translateXProperty().bind(t.xProperty());
+        iv5.translateYProperty().bind(t.yProperty());
+        this.PaneauDeJeu.getChildren().add(iv5);
+
+//        c.setTranslateX(t.getX());
+//        c.setTranslateY(t.getY());
+//        c.translateXProperty().bind(t.xProperty());
+//        c.translateYProperty().bind(t.yProperty());
+//        PaneauDeJeu.getChildren().add(c);
+//        c.setOnMouseExited(e -> {
+//                    ajouterDefenseDansModele(t.getX(), t.getY());
+//                    ajusterEmplacementtourelle(t, (Math.round(t.getX() / 16)), Math.round(t.getY() / 16));
+//                    afficherTerrain(env.getTerrainModele());
+//                    System.out.println(t.xProperty().getValue() + " " + t.yProperty().getValue());
+//
+//                    if(TourellebienPlacé(t)) {
+//                        env.ajouterDefense(t);
+//                        System.out.println("Tourelle ajoutée");
+//                    }
+//                    else {
+//                        System.out.println("Erreur ajout");
+//                        Pa.getChildren().remove(c);
+//                    }
+//
+//                }
+//        );
         }
-        event.setDropCompleted(success);
-        event.consume();
-    }
-
-    @FXML
-    private void setOnDragOver(DragEvent event) {
-        if (event.getGestureSource() != PaneauDeJeu && event.getDragboard().hasImage()) {
-            event.acceptTransferModes(TransferMode.COPY);
-        }
-        event.consume();
-    }
 
 
-
-    @Override
+        @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrain = new Terrain(40); // initialisation du terrain avec une taille de case de 32
         TerrainVue tv = new TerrainVue(terrain, tilePane);
         tv.afficherTerrain();
 
-        EnnemisVue ennemisVue = new EnnemisVue(PaneauDeJeu);
+        ennemisVue = new EnnemisVue(PaneauDeJeu);
 
-        personnage = new Ennemi(4, terrain, 100);
-        ennemisVue.créerSprite(personnage);
+        ennemi = new Ennemi(4, terrain, 100);
+        ennemisVue.créerSprite(ennemi);
 
 
 
@@ -117,7 +136,9 @@ public class Controleur implements Initializable {
 
 //        ListChangeListener<Ennemi> listen = new ListObs();
 //        terrain.getActeurs().addListener(listen);
-
+          vaisseauNormal.setOnMouseClicked( event -> {
+                testTourelle(null);
+            });
 
     }
 
@@ -132,7 +153,7 @@ public class Controleur implements Initializable {
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
-                    personnage.seDeplace();
+                    ennemi.seDeplace();
                 })
         );
         gameLoop.getKeyFrames().add(kf);

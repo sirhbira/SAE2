@@ -43,7 +43,7 @@
                   </HBox>
                   <HBox prefHeight="66.0" prefWidth="177.0">
                      <children>
-                        <ImageView fx:id="vaisseauNormal" fitHeight="64.0" fitWidth="71.0" onDragDetected="#setOnDragDetected" onDragDropped="#setOnDragDropped" onDragOver="#setOnDragOver" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="vaisseauNormal" fitHeight="64.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@vaiseauNormal.png" />
                            </image>

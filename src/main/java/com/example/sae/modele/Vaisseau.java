@@ -17,6 +17,9 @@ public  class Vaisseau {
         this.y = new SimpleIntegerProperty(y);
         this.terrain=terrain;
     }
+    public Vaisseau(Terrain terrain) {
+        this.terrain=terrain;
+    }
 
     public IntegerProperty xProperty(){
         return x;
